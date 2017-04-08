@@ -10,6 +10,9 @@ namespace Libreria
 {
     public class Class1:MarshalByRefObject
     {
+        #region atributos
+        List<user> ususarios_server = new List<user>();
+        #endregion
         public Class1() { }
 
         public int Suma(int a , int b)
@@ -17,10 +20,12 @@ namespace Libreria
             return a + b;
         }
 
-        public int Subscribe()//this method saves the tcp channel where a new client is listening messages
+        public int Subscribe(string nickname, string ip,string port)//this method saves the tcp channel where a new client is listening messages
         {
             try
             {
+                user n_user = new user(nickname, ip, port);
+                ususarios_server.Add(n_user);
                 return 1;
             }
             catch (Exception)
@@ -31,10 +36,12 @@ namespace Libreria
 
         }
 
-        public int UnSubscribe()//this method delete the tcp channel where a new client is listening messages
+        public int UnSubscribe(string nickname, string ip, string port)//this method delete the tcp channel where a new client is listening messages
         {
             try
             {
+                user o_user = new user(nickname, ip, port);
+                ususarios_server.Remove(o_user);
                 return 1;
             }
             catch (Exception)
