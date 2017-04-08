@@ -14,10 +14,30 @@ namespace Cliente
     {
         static void Main(string[] args)
         {
-            TcpClientChannel chanel = new TcpClientChannel();
+            List<string> servidores = new List<string>();
+            servidores.Add("tcp://localhost:1235/");
+            servidores.Add("tcp://localhost:1240/");
+
+            TcpChannel chanel = new TcpChannel(9000);
             ChannelServices.RegisterChannel(chanel, false);
-            RemotingConfiguration.RegisterWellKnownClientType(
-                typeof(Class1),"tcp://localhost:1235/calculadora");
+
+            for (int i = 0; i < servidores.Count; i++)
+            {
+               
+                Class1 objectWellKnown = new Class1();
+                // After the channel is registered, the object needs to be registered
+                // with the remoting infrastructure.  So, Marshal is called.
+                ObjRef objrefWellKnown = RemotingServices.Marshal(objectWellKnown, servidores[i] );
+                Console.WriteLine("An instance of SampleWellKnown type is published at {0}.", objrefWellKnown.URI);
+              
+                Console.WriteLine("Press enter to unregister SampleWellKnown, so that it is no longer available on this channel.");
+                Console.ReadLine();
+              //  RemotingServices.Disconnect(objectWellKnown);
+            }
+
+            
+            /* RemotingConfiguration.RegisterWellKnownClientType(
+                 typeof(Class1),"tcp://localhost:1235/calculadora");
             try
             {
                 while (true)
@@ -32,8 +52,8 @@ namespace Cliente
 
                 Console.WriteLine(ex.Message);
                 Console.ReadKey();
-            }
-            
+            }*/
+            Console.ReadKey();
         }
     }
 }

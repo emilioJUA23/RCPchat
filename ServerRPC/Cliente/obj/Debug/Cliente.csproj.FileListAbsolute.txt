@@ -5,3 +5,4 @@ C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Cliente\bin\
 C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Cliente\bin\Debug\Libreria.pdb
 C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Cliente\obj\Debug\Cliente.exe
 C:\Users\LuisEmilio\documents\visual studio 2017\Projects\ServerRPC\Cliente\obj\Debug\Cliente.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Cliente\obj\Debug\Cliente.csprojResolveAssemblyReference.cache
