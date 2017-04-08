@@ -16,7 +16,9 @@ namespace ServerRPC
             RemotingConfiguration.RegisterWellKnownServiceType(
             typeof(Libreria.Class1),"calculadora", 
             WellKnownObjectMode.SingleCall);
-            TcpChannel chnl = new TcpChannel(1235);
+            Console.WriteLine("Servidor montandose por favor ingrese puerto para escuchar mensajes");
+            int  tcpport=Convert.ToInt32(Console.ReadLine());
+            TcpChannel chnl = new TcpChannel(tcpport);
             Console.WriteLine("estamos escuchando");
             Console.ReadKey();
         }
