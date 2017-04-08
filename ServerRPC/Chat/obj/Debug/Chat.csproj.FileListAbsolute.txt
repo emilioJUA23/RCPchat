@@ -1,0 +1,11 @@
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\bin\Debug\Chat.exe.config
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\bin\Debug\Chat.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\bin\Debug\Chat.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.Form1.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.Properties.Resources.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.csproj.GenerateResource.Cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\obj\Debug\Chat.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Chat\bin\Debug\Libreria.pdb
