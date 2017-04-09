@@ -36,10 +36,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbpuerto_server = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btn_client_subscribe = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tb_client_port = new System.Windows.Forms.TextBox();
+            this.tbnick = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_server_tcp_chan = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -66,12 +72,19 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button4);
+            this.splitContainer1.Panel2.Controls.Add(this.btn_client_subscribe);
+            this.splitContainer1.Panel2.Controls.Add(this.label5);
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.tb_client_port);
+            this.splitContainer1.Panel2.Controls.Add(this.tbnick);
             this.splitContainer1.Panel2.Controls.Add(this.textBox5);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox3);
+            this.splitContainer1.Panel2.Controls.Add(this.tb_server_tcp_chan);
             this.splitContainer1.Panel2.Controls.Add(this.button3);
             this.splitContainer1.Panel2.Controls.Add(this.listBox2);
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1082, 563);
             this.splitContainer1.SplitterDistance = 360;
             this.splitContainer1.TabIndex = 0;
@@ -137,52 +150,115 @@
             this.tbpuerto_server.Size = new System.Drawing.Size(243, 20);
             this.tbpuerto_server.TabIndex = 0;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(605, 79);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 34);
+            this.button4.TabIndex = 18;
+            this.button4.Text = "leave the chat";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btn_client_subscribe
+            // 
+            this.btn_client_subscribe.Location = new System.Drawing.Point(381, 36);
+            this.btn_client_subscribe.Name = "btn_client_subscribe";
+            this.btn_client_subscribe.Size = new System.Drawing.Size(97, 23);
+            this.btn_client_subscribe.TabIndex = 17;
+            this.btn_client_subscribe.Text = "registrar ususario";
+            this.btn_client_subscribe.UseVisualStyleBackColor = true;
+            this.btn_client_subscribe.Click += new System.EventHandler(this.btn_client_subscribe_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(201, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "puerto cliente";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "nickname";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // tb_client_port
+            // 
+            this.tb_client_port.Location = new System.Drawing.Point(204, 39);
+            this.tb_client_port.Name = "tb_client_port";
+            this.tb_client_port.Size = new System.Drawing.Size(150, 20);
+            this.tb_client_port.TabIndex = 14;
+            this.tb_client_port.TextChanged += new System.EventHandler(this.tb_client_port_TextChanged);
+            // 
+            // tbnick
+            // 
+            this.tbnick.Location = new System.Drawing.Point(38, 39);
+            this.tbnick.Name = "tbnick";
+            this.tbnick.Size = new System.Drawing.Size(141, 20);
+            this.tbnick.TabIndex = 13;
+            this.tbnick.TextChanged += new System.EventHandler(this.tbnick_TextChanged);
+            // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(38, 119);
+            this.textBox5.Location = new System.Drawing.Point(38, 167);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(601, 20);
             this.textBox5.TabIndex = 12;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(282, 49);
+            this.label3.Location = new System.Drawing.Point(282, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "command line";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(38, 65);
+            this.textBox4.Location = new System.Drawing.Point(38, 126);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(601, 20);
             this.textBox4.TabIndex = 10;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
-            // textBox3
+            // tb_server_tcp_chan
             // 
-            this.textBox3.Location = new System.Drawing.Point(38, 17);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(561, 20);
-            this.textBox3.TabIndex = 9;
+            this.tb_server_tcp_chan.Location = new System.Drawing.Point(38, 65);
+            this.tb_server_tcp_chan.Name = "tb_server_tcp_chan";
+            this.tb_server_tcp_chan.Size = new System.Drawing.Size(561, 20);
+            this.tb_server_tcp_chan.TabIndex = 9;
+            this.tb_server_tcp_chan.Text = "tcp://localhost:8080/chat";
+            this.tb_server_tcp_chan.TextChanged += new System.EventHandler(this.tb_server_tcp_chan_TextChanged);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(614, 14);
+            this.button3.Location = new System.Drawing.Point(605, 50);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
             this.button3.Text = "join chat!";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(38, 155);
+            this.listBox2.Location = new System.Drawing.Point(38, 205);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(601, 355);
             this.listBox2.TabIndex = 7;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -212,12 +288,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbpuerto_server;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_server_tcp_chan;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button btn_client_subscribe;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tb_client_port;
+        private System.Windows.Forms.TextBox tbnick;
+        private System.Windows.Forms.Button button4;
     }
 }
 

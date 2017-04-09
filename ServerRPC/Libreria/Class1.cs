@@ -36,6 +36,20 @@ namespace Libreria
 
         }
 
+        public bool its_in_tha_room(string nickname, string ip, string port)
+        {
+            bool exist = false;
+            for (int i = 0; i < ususarios_server.Count; i++)
+            {
+                if (nickname==ususarios_server[i].nickname||(ip+port)==(ususarios_server[i].ip+ususarios_server[i].port))
+                {
+                    exist = true;
+                    break;
+                }
+            }
+            return exist;
+        }
+
         public int UnSubscribe(string nickname, string ip, string port)//this method delete the tcp channel where a new client is listening messages
         {
             try
