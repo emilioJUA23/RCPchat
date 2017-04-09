@@ -1,0 +1,11 @@
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\bin\Debug\Client_form.exe.config
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\bin\Debug\Client_form.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\bin\Debug\Client_form.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\bin\Debug\Libreria.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.Form1.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.Properties.Resources.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.csproj.GenerateResource.Cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\Client_form\obj\Debug\Client_form.pdb

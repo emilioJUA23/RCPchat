@@ -16,6 +16,7 @@ namespace Chat
 {
     public partial class Form1 : Form
     {
+        Class1 remota;
         public Form1()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace Chat
                 ChannelServices.RegisterChannel(serverchannel, false);
                 RemotingConfiguration.RegisterWellKnownServiceType(
                 typeof(Libreria.Class1), "chat",
-                WellKnownObjectMode.SingleCall);
+                WellKnownObjectMode.Singleton);
                 MessageBox.Show("es servidor ha sido montado");
             }
             catch (Exception ex)
@@ -55,6 +56,116 @@ namespace Chat
                 serverchannel = null;
                 MessageBox.Show("es servidor ha sido apagado");
             }
+        }
+        TcpClientChannel client_channel;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                client_channel = new TcpClientChannel();
+                ChannelServices.RegisterChannel(client_channel, false);
+                remota = (Class1)Activator.GetObject(typeof(Class1), tb_server_tcp_chan.Text);
+                if (remota.its_in_tha_room(n_user.nickname,n_user.ip,n_user.port))
+                {
+                    MessageBox.Show("ususario ya esta en sala o nickname ya tomado.");
+                }
+                else
+                {
+                    remota.Subscribe(n_user.nickname,n_user.ip,n_user.port);
+                    MessageBox.Show("te has unido a la sala");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido crear unis a sala: " + ex.Message);
+            }
+        }
+
+        user n_user;
+        private void btn_client_subscribe_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nick = tbnick.Text;
+                string puerto_cliente = tb_client_port.Text;
+                n_user = new user(nick, "localhost", puerto_cliente);
+                MessageBox.Show("ususario creado.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido crear ususario: "+ex.Message);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (remota.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))
+                {
+                    remota.UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
+                    MessageBox.Show("salimos de la sala!");
+                }
+                else
+                {
+                    MessageBox.Show("usuario no estaba en la sala.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido crear salir a sala: " + ex.Message);
+            }
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_client_port_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbnick_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_server_tcp_chan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

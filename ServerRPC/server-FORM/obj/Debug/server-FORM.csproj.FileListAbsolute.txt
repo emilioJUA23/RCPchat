@@ -1,0 +1,11 @@
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\bin\Debug\server-FORM.exe.config
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\bin\Debug\server-FORM.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\bin\Debug\server-FORM.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\bin\Debug\Libreria.pdb
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server-FORM.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server_FORM.Form1.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server_FORM.Properties.Resources.resources
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server-FORM.csproj.GenerateResource.Cache
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server-FORM.exe
+C:\Users\LuisEmilio\Documents\Visual Studio 2017\Projects\ServerRPC\server-FORM\obj\Debug\server-FORM.pdb
