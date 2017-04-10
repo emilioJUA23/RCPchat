@@ -12,6 +12,7 @@ namespace Libreria
     {
         #region atributos
         List<user> ususarios_server = new List<user>();
+        List<List<string>> buzon_de_mensajes = new List<List<string>>();
         #endregion
         public Class1() { }
 
@@ -26,6 +27,8 @@ namespace Libreria
             {
                 user n_user = new user(nickname, ip, port);
                 ususarios_server.Add(n_user);
+                List<string> buzonUsuario = new List<string>();
+                buzon_de_mensajes.Add(buzonUsuario);
                 return 1;
             }
             catch (Exception)
@@ -54,8 +57,17 @@ namespace Libreria
         {
             try
             {
-                user o_user = new user(nickname, ip, port);
-                ususarios_server.Remove(o_user);
+                //user o_user = new user(nickname, ip, port);
+                //ususarios_server.Remove(o_user);
+                for (int i = 0; i < ususarios_server.Count; i++)
+                {
+                    if (nickname==ususarios_server[i].nickname&&ip==ususarios_server[i].ip&&port==ususarios_server[i].port)
+                    {
+                        ususarios_server.RemoveAt(i);
+                        buzon_de_mensajes.RemoveAt(i);
+                    }
+
+                }
                 return 1;
             }
             catch (Exception)
@@ -68,14 +80,43 @@ namespace Libreria
 
         public int broadcast(string message,string usr)// this method sends to every client suscribe a message 
         {
+            string mensaje = usr + " dice: " + message;
             try
             {
+                for (int i = 0; i < buzon_de_mensajes.Count; i++)
+                {
+                    buzon_de_mensajes[i].Add(mensaje);
+                }
                 return 1;
             }
             catch (Exception)
             {
                 return 0;
             }
+        }
+
+        public List<string> mail_delivery(string nickname)
+        {
+            try
+            {
+                for (int i = 0; i < ususarios_server.Count; i++)
+                {
+                    if (nickname == ususarios_server[i].nickname)
+                    {
+                        List < string > buzon_aux= buzon_de_mensajes[i];
+                        buzon_de_mensajes[i] = new List<string>();
+                        return buzon_aux;
+                    }
+
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
         }
 
         public List<string> connecterd_usr()//este metodo debe desplegar todos los usuarios conectados a un server
