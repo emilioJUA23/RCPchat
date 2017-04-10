@@ -29,6 +29,10 @@ namespace Libreria
                 ususarios_server.Add(n_user);
                 List<string> buzonUsuario = new List<string>();
                 buzon_de_mensajes.Add(buzonUsuario);
+                for (int i = 0; i < buzon_de_mensajes.Count; i++)
+                {
+                    buzon_de_mensajes[i].Add(nickname + " se unio a la sala");
+                }
                 return 1;
             }
             catch (Exception)
@@ -53,6 +57,20 @@ namespace Libreria
             return exist;
         }
 
+        public bool its_in_tha_room(string nickname)
+        {
+            bool exist = false;
+            for (int i = 0; i < ususarios_server.Count; i++)
+            {
+                if (nickname == ususarios_server[i].nickname)
+                {
+                    exist = true;
+                    break;
+                }
+            }
+            return exist;
+        }
+
         public int UnSubscribe(string nickname, string ip, string port)//this method delete the tcp channel where a new client is listening messages
         {
             try
@@ -65,6 +83,11 @@ namespace Libreria
                     {
                         ususarios_server.RemoveAt(i);
                         buzon_de_mensajes.RemoveAt(i);
+                        for(int j = 0; j < buzon_de_mensajes.Count; j++)
+                        {
+                            buzon_de_mensajes[i].Add(nickname + " salio de la sala");
+                        }
+                        break;
                     }
 
                 }
@@ -78,9 +101,81 @@ namespace Libreria
 
         }
 
+
+        public int expell(string nickname)//this method delete the tcp channel where a new client is listening messages
+        {
+            try
+            {
+                //user o_user = new user(nickname, ip, port);
+                //ususarios_server.Remove(o_user);
+                for (int i = 0; i < ususarios_server.Count; i++)
+                {
+                    if (nickname == ususarios_server[i].nickname)
+                    {
+                        buzon_de_mensajes[i].Add("por mula te sacamos.");
+                        ususarios_server.RemoveAt(i);
+                        buzon_de_mensajes.RemoveAt(i);
+                        for (int j = 0; j < buzon_de_mensajes.Count; j++)
+                        {
+                            buzon_de_mensajes[i].Add(nickname + " salio de la sala");
+                        }
+                        break;
+                    }
+
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+
+        }
         public int broadcast(string message,string usr)// this method sends to every client suscribe a message 
         {
             string mensaje = usr + " dice: " + message;
+            try
+            {
+                for (int i = 0; i < buzon_de_mensajes.Count; i++)
+                {
+                    buzon_de_mensajes[i].Add(mensaje);
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int mensaje_privado(string message,string reciever)
+        {
+            try
+            {
+                for (int i = 0; i < ususarios_server.Count; i++)
+                {
+                    if (ususarios_server[i].nickname == reciever)
+                    {
+                        buzon_de_mensajes[i].Add(message);
+                        break;
+                    }
+                    else { }
+                }  
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+
+        }
+
+
+        public int directories(string message, string usr)// this method sends to every client suscribe a message 
+        {
+            string mensaje  =  "dir_init,"+message+","+usr;
             try
             {
                 for (int i = 0; i < buzon_de_mensajes.Count; i++)
@@ -124,9 +219,14 @@ namespace Libreria
             return null;
         }
 
-        public List<string> connecterd_server()//este metodo debe desplegar todos los servidores a los que estoy conectado
+        public List<string> connected_server()//este metodo debe desplegar todos los servidores a los que estoy conectado
         {
-            return null;
+            List<string> usuarios = new List<string>();
+            foreach (user c in ususarios_server)
+            {
+                usuarios.Add(c.nickname);
+            }
+            return usuarios;
         }
 
         public string directory(string ruta)

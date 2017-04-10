@@ -20,7 +20,7 @@ namespace server_FORM
         {
             InitializeComponent();
         }
-
+        Class1 local;
         TcpChannel serverchannel;
         private void btnstart_Click(object sender, EventArgs e)
         {
@@ -33,6 +33,7 @@ namespace server_FORM
                 typeof(Libreria.Class1), "chat",
                 WellKnownObjectMode.Singleton);
                 MessageBox.Show("es servidor ha sido montado");
+                local = (Class1)Activator.GetObject(typeof(Class1), "tcp://localhost:"+tb_puertoserver.Text+"/chat");
             }
             catch (Exception ex)
             {
@@ -50,6 +51,43 @@ namespace server_FORM
                 serverchannel = null;
                 MessageBox.Show("es servidor ha sido apagado");
             }
+        }
+
+        private void bntcommadn_Click(object sender, EventArgs e)
+        {
+            string[] comando = tbcomando.Text.ToLower().Split(' ');
+            if (comando[0] == "kill" && comando[1] == "user")
+            {
+                if (local.its_in_tha_room(comando[2]))
+                {
+                    int aux = local.expell(comando[2]);
+                    if (aux == 1)
+                    {
+                        listBox1.Items.Add("usuario "+comando[2]+" eliminado.");
+                    }
+                    else
+                    {
+                        listBox1.Items.Add("usuario " + comando[2] + " no pudo ser eliminado.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("no existe el ususario.");
+                }
+            }
+            else if (comando[0] == "list" && comando[1] == "connected")
+            {
+                List<string> users = local.connected_server();
+                foreach (string  c in users)
+                {
+                    listBox1.Items.Add(c);
+                }
+            }
+            else
+            {
+                MessageBox.Show("commando no reconocible.");
+            }
+
         }
     }
 }
