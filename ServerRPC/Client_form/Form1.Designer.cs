@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnleave = new System.Windows.Forms.Button();
             this.btn_client_subscribe = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tb_client_port = new System.Windows.Forms.TextBox();
             this.tbnick = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tbmensaje = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tb_server_tcp_chan = new System.Windows.Forms.TextBox();
             this.btnjoin = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lb_pantalla_chat = new System.Windows.Forms.ListBox();
+            this.btnmensaje = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnleave
@@ -94,12 +97,12 @@
             this.tbnick.Size = new System.Drawing.Size(141, 20);
             this.tbnick.TabIndex = 25;
             // 
-            // textBox5
+            // tbmensaje
             // 
-            this.textBox5.Location = new System.Drawing.Point(12, 155);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(601, 20);
-            this.textBox5.TabIndex = 24;
+            this.tbmensaje.Location = new System.Drawing.Point(12, 155);
+            this.tbmensaje.Name = "tbmensaje";
+            this.tbmensaje.Size = new System.Drawing.Size(601, 20);
+            this.tbmensaje.TabIndex = 24;
             // 
             // label3
             // 
@@ -135,31 +138,46 @@
             this.btnjoin.UseVisualStyleBackColor = true;
             this.btnjoin.Click += new System.EventHandler(this.btnjoin_Click);
             // 
-            // listBox2
+            // lb_pantalla_chat
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(12, 193);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(601, 355);
-            this.listBox2.TabIndex = 19;
+            this.lb_pantalla_chat.FormattingEnabled = true;
+            this.lb_pantalla_chat.Location = new System.Drawing.Point(12, 193);
+            this.lb_pantalla_chat.Name = "lb_pantalla_chat";
+            this.lb_pantalla_chat.Size = new System.Drawing.Size(601, 355);
+            this.lb_pantalla_chat.TabIndex = 19;
+            // 
+            // btnmensaje
+            // 
+            this.btnmensaje.Location = new System.Drawing.Point(623, 153);
+            this.btnmensaje.Name = "btnmensaje";
+            this.btnmensaje.Size = new System.Drawing.Size(75, 23);
+            this.btnmensaje.TabIndex = 31;
+            this.btnmensaje.Text = "send message";
+            this.btnmensaje.UseVisualStyleBackColor = true;
+            this.btnmensaje.Click += new System.EventHandler(this.btnmensaje_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 560);
+            this.Controls.Add(this.btnmensaje);
             this.Controls.Add(this.btnleave);
             this.Controls.Add(this.btn_client_subscribe);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tb_client_port);
             this.Controls.Add(this.tbnick);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.tbmensaje);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.tb_server_tcp_chan);
             this.Controls.Add(this.btnjoin);
-            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.lb_pantalla_chat);
             this.Name = "Form1";
             this.Text = "Chat_client";
             this.ResumeLayout(false);
@@ -175,12 +193,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tb_client_port;
         private System.Windows.Forms.TextBox tbnick;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbmensaje;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox tb_server_tcp_chan;
         private System.Windows.Forms.Button btnjoin;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lb_pantalla_chat;
+        private System.Windows.Forms.Button btnmensaje;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

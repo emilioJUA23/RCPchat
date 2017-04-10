@@ -17,6 +17,7 @@ namespace Client_form
     public partial class Form1 : Form
     {
         Class1 remota;
+        Task remote_mail;
         public Form1()
         {
             InitializeComponent();
@@ -42,8 +43,11 @@ namespace Client_form
         {
             try
             {
-                client_channel = new TcpChannel();
-                ChannelServices.RegisterChannel(client_channel, false);
+                if (client_channel==null)
+                {
+                    client_channel = new TcpChannel();
+                    ChannelServices.RegisterChannel(client_channel, false);
+                }
                 remota = (Class1)Activator.GetObject(typeof(Class1), tb_server_tcp_chan.Text);
                 if (remota.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))
                 {
@@ -57,6 +61,7 @@ namespace Client_form
                 {
                     remota.Subscribe(n_user.nickname, n_user.ip, n_user.port);
                     MessageBox.Show("te has unido a la sala");
+                    timer1.Start();
                 }
             }
             catch (Exception ex)
@@ -90,6 +95,33 @@ namespace Client_form
             {
                 MessageBox.Show("No se ha podido crear salir a sala: " + ex.Message);
             }
+        }
+
+        private void chequear_chat()
+        {
+           
+                List<string> buzon_aux = remota.mail_delivery(n_user.nickname);
+                foreach (string c in buzon_aux)
+                {
+                    lb_pantalla_chat.Items.Add(c);
+                }
+            
+        }
+
+        private void btnmensaje_Click(object sender, EventArgs e)
+        {
+            int a = remota.broadcast(tbmensaje.Text, n_user.nickname);
+            //de aqui para abajo es demostrativo para retornar mensaje
+            List<string> buzon_aux = remota.mail_delivery(n_user.nickname);
+            foreach (string c in buzon_aux)
+            {
+                lb_pantalla_chat.Items.Add(c);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            chequear_chat();
         }
     }
 }
