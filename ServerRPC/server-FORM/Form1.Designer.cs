@@ -33,8 +33,9 @@
             this.btnstart = new System.Windows.Forms.Button();
             this.btnstop = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbcomando = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bntcommadn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tb_puertoserver
@@ -81,29 +82,40 @@
             this.listBox1.Size = new System.Drawing.Size(459, 199);
             this.listBox1.TabIndex = 4;
             // 
-            // textBox2
+            // tbcomando
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 109);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(459, 20);
-            this.textBox2.TabIndex = 5;
+            this.tbcomando.Location = new System.Drawing.Point(15, 86);
+            this.tbcomando.Name = "tbcomando";
+            this.tbcomando.Size = new System.Drawing.Size(459, 20);
+            this.tbcomando.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 82);
+            this.label2.Location = new System.Drawing.Point(15, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "command line:";
             // 
+            // bntcommadn
+            // 
+            this.bntcommadn.Location = new System.Drawing.Point(15, 112);
+            this.bntcommadn.Name = "bntcommadn";
+            this.bntcommadn.Size = new System.Drawing.Size(75, 23);
+            this.bntcommadn.TabIndex = 7;
+            this.bntcommadn.Text = "ejecutar";
+            this.bntcommadn.UseVisualStyleBackColor = true;
+            this.bntcommadn.Click += new System.EventHandler(this.bntcommadn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 356);
+            this.ClientSize = new System.Drawing.Size(505, 356);
+            this.Controls.Add(this.bntcommadn);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tbcomando);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnstop);
             this.Controls.Add(this.btnstart);
@@ -123,8 +135,9 @@
         private System.Windows.Forms.Button btnstart;
         private System.Windows.Forms.Button btnstop;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbcomando;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bntcommadn;
     }
 }
 
