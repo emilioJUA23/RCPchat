@@ -28,26 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnexecute = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbcomando_s = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.tb_client_port = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbpuerto_server = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.btn_client_subscribe = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tb_client_port = new System.Windows.Forms.TextBox();
             this.tbnick = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tbmessage = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbcomando = new System.Windows.Forms.TextBox();
             this.tb_server_tcp_chan = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,32 +65,43 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnexecute);
             this.splitContainer1.Panel1.Controls.Add(this.listBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox2);
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
+            this.splitContainer1.Panel1.Controls.Add(this.tbcomando_s);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
+            this.splitContainer1.Panel1.Controls.Add(this.tb_client_port);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.tbpuerto_server);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button6);
+            this.splitContainer1.Panel2.Controls.Add(this.button5);
             this.splitContainer1.Panel2.Controls.Add(this.button4);
             this.splitContainer1.Panel2.Controls.Add(this.btn_client_subscribe);
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.tb_client_port);
             this.splitContainer1.Panel2.Controls.Add(this.tbnick);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox5);
+            this.splitContainer1.Panel2.Controls.Add(this.tbmessage);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox4);
+            this.splitContainer1.Panel2.Controls.Add(this.tbcomando);
             this.splitContainer1.Panel2.Controls.Add(this.tb_server_tcp_chan);
             this.splitContainer1.Panel2.Controls.Add(this.button3);
             this.splitContainer1.Panel2.Controls.Add(this.listBox2);
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(1082, 563);
-            this.splitContainer1.SplitterDistance = 360;
+            this.splitContainer1.Size = new System.Drawing.Size(1111, 563);
+            this.splitContainer1.SplitterDistance = 369;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnexecute
+            // 
+            this.btnexecute.BackColor = System.Drawing.Color.Transparent;
+            this.btnexecute.Location = new System.Drawing.Point(247, 128);
+            this.btnexecute.Name = "btnexecute";
+            this.btnexecute.Size = new System.Drawing.Size(75, 23);
+            this.btnexecute.TabIndex = 17;
+            this.btnexecute.Text = "execute";
+            this.btnexecute.UseVisualStyleBackColor = false;
+            this.btnexecute.Click += new System.EventHandler(this.btnexecute_Click);
             // 
             // listBox1
             // 
@@ -100,19 +114,28 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(139, 126);
+            this.label2.Location = new System.Drawing.Point(12, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "command line";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // textBox2
+            // label5
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 155);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(307, 20);
-            this.textBox2.TabIndex = 4;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "puerto de instancia:";
+            // 
+            // tbcomando_s
+            // 
+            this.tbcomando_s.Location = new System.Drawing.Point(15, 155);
+            this.tbcomando_s.Name = "tbcomando_s";
+            this.tbcomando_s.Size = new System.Drawing.Size(307, 20);
+            this.tbcomando_s.TabIndex = 4;
             // 
             // button2
             // 
@@ -124,6 +147,13 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tb_client_port
+            // 
+            this.tb_client_port.Location = new System.Drawing.Point(27, 25);
+            this.tb_client_port.Name = "tb_client_port";
+            this.tb_client_port.Size = new System.Drawing.Size(150, 20);
+            this.tb_client_port.TabIndex = 14;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(27, 74);
@@ -134,21 +164,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // button6
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Server Port";
+            this.button6.Location = new System.Drawing.Point(651, 164);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 20;
+            this.button6.Text = "send";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // tbpuerto_server
+            // button5
             // 
-            this.tbpuerto_server.Location = new System.Drawing.Point(79, 21);
-            this.tbpuerto_server.Name = "tbpuerto_server";
-            this.tbpuerto_server.Size = new System.Drawing.Size(243, 20);
-            this.tbpuerto_server.TabIndex = 0;
+            this.button5.Location = new System.Drawing.Point(651, 124);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 19;
+            this.button5.Text = "execute";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -170,16 +204,6 @@
             this.btn_client_subscribe.UseVisualStyleBackColor = true;
             this.btn_client_subscribe.Click += new System.EventHandler(this.btn_client_subscribe_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(201, 21);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "puerto cliente";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -188,15 +212,6 @@
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 15;
             this.label4.Text = "nickname";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
-            // 
-            // tb_client_port
-            // 
-            this.tb_client_port.Location = new System.Drawing.Point(204, 39);
-            this.tb_client_port.Name = "tb_client_port";
-            this.tb_client_port.Size = new System.Drawing.Size(150, 20);
-            this.tb_client_port.TabIndex = 14;
-            this.tb_client_port.TextChanged += new System.EventHandler(this.tb_client_port_TextChanged);
             // 
             // tbnick
             // 
@@ -204,15 +219,13 @@
             this.tbnick.Name = "tbnick";
             this.tbnick.Size = new System.Drawing.Size(141, 20);
             this.tbnick.TabIndex = 13;
-            this.tbnick.TextChanged += new System.EventHandler(this.tbnick_TextChanged);
             // 
-            // textBox5
+            // tbmessage
             // 
-            this.textBox5.Location = new System.Drawing.Point(38, 167);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(601, 20);
-            this.textBox5.TabIndex = 12;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.tbmessage.Location = new System.Drawing.Point(38, 167);
+            this.tbmessage.Name = "tbmessage";
+            this.tbmessage.Size = new System.Drawing.Size(601, 20);
+            this.tbmessage.TabIndex = 12;
             // 
             // label3
             // 
@@ -222,15 +235,13 @@
             this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "command line";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // textBox4
+            // tbcomando
             // 
-            this.textBox4.Location = new System.Drawing.Point(38, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(601, 20);
-            this.textBox4.TabIndex = 10;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.tbcomando.Location = new System.Drawing.Point(38, 126);
+            this.tbcomando.Name = "tbcomando";
+            this.tbcomando.Size = new System.Drawing.Size(601, 20);
+            this.tbcomando.TabIndex = 10;
             // 
             // tb_server_tcp_chan
             // 
@@ -239,7 +250,6 @@
             this.tb_server_tcp_chan.Size = new System.Drawing.Size(561, 20);
             this.tb_server_tcp_chan.TabIndex = 9;
             this.tb_server_tcp_chan.Text = "tcp://localhost:8080/chat";
-            this.tb_server_tcp_chan.TextChanged += new System.EventHandler(this.tb_server_tcp_chan_TextChanged);
             // 
             // button3
             // 
@@ -258,13 +268,16 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(601, 355);
             this.listBox2.TabIndex = 7;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 563);
+            this.ClientSize = new System.Drawing.Size(1111, 563);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "chat_service";
@@ -282,24 +295,26 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbcomando_s;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbpuerto_server;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox tb_server_tcp_chan;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbmessage;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbcomando;
         private System.Windows.Forms.Button btn_client_subscribe;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tb_client_port;
         private System.Windows.Forms.TextBox tbnick;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnexecute;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
