@@ -112,13 +112,7 @@ namespace Libreria
                 {
                     if (nickname == ususarios_server[i].nickname)
                     {
-                        buzon_de_mensajes[i].Add("por mula te sacamos.");
-                        ususarios_server.RemoveAt(i);
-                        buzon_de_mensajes.RemoveAt(i);
-                        for (int j = 0; j < buzon_de_mensajes.Count; j++)
-                        {
-                            buzon_de_mensajes[i].Add(nickname + " salio de la sala");
-                        }
+                        mensaje_privado("sudo_kill_yourself", nickname);
                         break;
                     }
 

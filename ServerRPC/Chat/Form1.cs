@@ -223,6 +223,15 @@ namespace Chat
                             else { }
                             listBox2.Items.Add(orden[2] + " te ha pedido un directorio.");
                         }
+                        else if (c=="sudo_kill_yourself")
+                        {
+                            remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
+                            remotes.RemoveAt(i);
+                            string para_mostrar = server_name[i];
+                            server_name.RemoveAt(i);
+                            listBox2.Items.Add( para_mostrar + "has sido eliminado de la sala por el servidor.");
+                            para_mostrar = null;
+                        }
                         else
                         {
                             listBox2.Items.Add(server_name[i] + "," + c);
@@ -233,7 +242,7 @@ namespace Chat
             catch (Exception ex)
             {
                 timer1.Stop();
-                MessageBox.Show("se ha desconectado del algun chat");
+                MessageBox.Show("ha ocurrido un error.");
             }
 
 
