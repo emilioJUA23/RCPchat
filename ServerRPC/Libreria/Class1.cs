@@ -8,14 +8,17 @@ using Libreria;
 
 namespace Libreria
 {
-    public class Class1:MarshalByRefObject
+    public class Class1 : MarshalByRefObject
     {
         #region atributos
-        List<user> ususarios_server = new List<user>();
-        List<List<string>> buzon_de_mensajes = new List<List<string>>();
+        public List<user> ususarios_server = new List<user>();
+        public List<List<string>> buzon_de_mensajes = new List<List<string>>();
         #endregion
         public Class1() { }
-
+        public bool IsInstance()
+        {
+            return true;
+        }
         public int Suma(int a , int b)
         {
             return a + b;
@@ -128,7 +131,7 @@ namespace Libreria
         }
         public int broadcast(string message,string usr)// this method sends to every client suscribe a message 
         {
-            string mensaje = usr + " dice: " + message;
+            string mensaje = usr + ": " + message;
             try
             {
                 for (int i = 0; i < buzon_de_mensajes.Count; i++)

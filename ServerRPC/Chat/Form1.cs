@@ -23,62 +23,20 @@ namespace Chat
         List<string> server_name = new List<string>();
         TcpChannel Channel;
         user n_user;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-
-                if (Channel == null)                                        //verifica si el canal ya fue registrado tanto como server como por el 
-                {
-                    Channel = new TcpChannel(Convert.ToInt32(tb_client_port.Text));  //registra el canal y el puerto por el cual entramos                            
-                    ChannelServices.RegisterChannel(Channel, false);
-                }
-                remotes.Add((Class1)Activator.GetObject(typeof(Class1), tb_server_tcp_chan.Text));    //invoca servicio remoto
-                if (remotes[remotes.Count - 1].its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))  //verifica si existo 
-                {
-                    remotes.RemoveAt(remotes.Count - 1);                                                  //elimina servicio 
-                    MessageBox.Show("ususario ya esta en sala o nickname ya tomado.");
-                }
-                else
-                {
-                    remotes[remotes.Count - 1].Subscribe(n_user.nickname, n_user.ip, n_user.port);      //me agrega 
-                    server_name.Add(tb_server_tcp_chan.Text);                                           //agrega direccio de la sala
-                    MessageBox.Show("te has unido a la sala");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se ha podido crear unis a sala: " + ex.Message);
-            }
+            Try_Connect(tb_server_tcp_chan.Text, tbnick.Text);
         }
-
 
         private void btn_client_subscribe_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string nick = tbnick.Text;
-                string puerto_cliente = tb_client_port.Text;
-                n_user = new user(nick, "localhost", puerto_cliente);
-                timer1.Start();
-                MessageBox.Show("ususario creado.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se ha podido crear ususario: " + ex.Message);
-            }
+            InstanciaUsuario(tbnick.Text);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -115,7 +73,21 @@ namespace Chat
             }
         }
 
-
+        private void InstanciaUsuario(string nick)
+        {
+            try
+            {
+                string puerto_cliente = tb_client_port.Text;
+                n_user = new user(nick, "localhost", puerto_cliente);
+                timer1.Start();
+                MessageBox.Show("Usuario creado.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido crear usuario: " + ex.Message);
+            }
+        }
+        
         #region server_side
         //este boton tiene la instancia que levanta el server
         private void button1_Click(object sender, EventArgs e)
@@ -272,18 +244,49 @@ namespace Chat
 
         #endregion
 
-        //envia mensajes 
-        private void button6_Click(object sender, EventArgs e)
+        #region comandos
+
+        private void Try_Connect(string ip_port, string username)
+        {
+            try
+            {
+                if (Channel == null)                                        //verifica si el canal ya fue registrado tanto como server como por el 
+                {
+                    Channel = new TcpChannel(Convert.ToInt32("tcp://" + tb_client_port.Text));  //registra el canal y el puerto por el cual entramos                            
+                    ChannelServices.RegisterChannel(Channel, false);
+                }
+                if (n_user == null)
+                {
+                    InstanciaUsuario(username);
+                }
+                Class1 RemotedObject = (Class1)Activator.GetObject(typeof(Class1), "tcp://" + ip_port + "/chat");
+                try { RemotedObject.IsInstance(); }
+                catch (Exception ex) { throw new Exception("No se encontro un servidor en la direccion intidaca"); }
+                if (RemotedObject.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))  //verifica si existo 
+                {
+                    MessageBox.Show("El Usuario ya esta en esta sala o nickname ya tomado.");
+                }
+                else
+                {
+                    RemotedObject.Subscribe(n_user.nickname, n_user.ip, n_user.port);      //me agrega 
+                    remotes.Add(RemotedObject);    //invoca servicio remoto
+                    server_name.Add("tcp://" + ip_port + "/chat");                                           //agrega direccio de la sala
+                    MessageBox.Show("Te has unido a la sala");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido unir a sala: " + ex.Message);
+            }
+        }
+
+        private void Send_Message(string message)
         {
             try
             {
                 for (int i = 0; i < server_name.Count; i++)
                 {
-                    if (server_name[i] == tb_server_tcp_chan.Text)
-                    {
-                        int a = remotes[i].broadcast(tbmessage.Text, n_user.nickname);
-                        break;
-                    }
+                    int a = remotes[i].broadcast(message, n_user.nickname);
                 }
             }
             catch (Exception)
@@ -291,6 +294,14 @@ namespace Chat
 
                 throw;
             }
+        }
+        
+        #endregion
+
+        //envia mensajes 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Send_Message(tbmessage.Text);
         }
 
         //terminal de comandos tipo usuario
@@ -305,14 +316,22 @@ namespace Chat
                     break;
                 }
             }
-            if (remota == null)
-            {
-                MessageBox.Show("no exita subscrito a este chat");
-            }
-            else
-            {
+            //if (remota == null)
+            //{
+                //MessageBox.Show("No esta subscrito a este chat");
+            //}
+            //else
+            //{
                 string[] comando = tbcomando.Text.ToLower().Split(' ');
-                if (comando[0] == "list" && comando[1] == "sender")
+                if (comando[0] == "connect")
+                {
+                    Try_Connect(comando[1], comando[2]);
+                }
+                else if (comando[0] == "send")
+                {
+                    Send_Message(comando[1]); //TODO: Concatenar todo el mensage 
+                }
+                else if (comando[0] == "list" && comando[1] == "sender")
                 {
 
                     List<string> users = remota.connected_server();
@@ -321,7 +340,6 @@ namespace Chat
                     {
                         listBox2.Items.Add("\t" + c);
                     }
-
                 }
                 else if (comando[0] == "list" && comando[1] == "dir")
                 {
@@ -330,7 +348,6 @@ namespace Chat
                     int contador_comillas = 0;
                     for (int i = 0; i < dir.Length; i++)
                     {
-
                         if (dir[i] == '"' && contador_comillas == 0)
                         {
                             contador_comillas++;
@@ -344,7 +361,6 @@ namespace Chat
                             aux = aux + dir[i];
                         }
                         else { }
-
                     }
                     int comp = remota.directories(aux, n_user.nickname);
                     if (comp == 1)
@@ -352,13 +368,12 @@ namespace Chat
 
                     }
                     else MessageBox.Show("error al ejecutar instruccion.");
-
                 }
                 else
                 {
                     MessageBox.Show("commando no reconocible.");
                 }
-            }
+            //}
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Client_form
                 string nick = tbnick.Text;
                 string puerto_cliente = tb_client_port.Text;
                 n_user = new user(nick, "localhost", puerto_cliente);
-                MessageBox.Show("ususario creado.");
+                MessageBox.Show("usuario creado.");
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace Client_form
                 remota = (Class1)Activator.GetObject(typeof(Class1), tb_server_tcp_chan.Text);
                 if (remota.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))
                 {
-                    MessageBox.Show("ususario ya esta en sala o nickname ya tomado.");
+                    MessageBox.Show("El usuario ya esta en sala o nickname ya tomado.");
                     if (ChannelServices.GetChannel(client_channel.ChannelName) != null)
                     {
                         ChannelServices.UnregisterChannel(client_channel);
@@ -61,7 +61,7 @@ namespace Client_form
                 else
                 {
                     remota.Subscribe(n_user.nickname, n_user.ip, n_user.port);
-                    MessageBox.Show("te has unido a la sala");
+                    MessageBox.Show("Te has unido a la sala");
                     timer1.Start();
                 }
             }
@@ -71,7 +71,7 @@ namespace Client_form
                 {
                     ChannelServices.UnregisterChannel(client_channel);
                 }
-                MessageBox.Show("No se ha podido crear unis a sala: " + ex.Message);
+                MessageBox.Show("No se ha podido unir a la sala: " + ex.Message);
             }
         }
 
