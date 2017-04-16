@@ -23,7 +23,6 @@ namespace Libreria
         {
             return a + b;
         }
-
         public int Subscribe(string nickname, string ip,string port)//this method saves the tcp channel where a new client is listening messages
         {
             try
@@ -34,13 +33,12 @@ namespace Libreria
                 buzon_de_mensajes.Add(buzonUsuario);
                 for (int i = 0; i < buzon_de_mensajes.Count; i++)
                 {
-                    buzon_de_mensajes[i].Add(nickname + " se unio a la sala");
+                    buzon_de_mensajes[i].Add(nickname + " se unio a la sala\r\n");
                 }
                 return 1;
             }
             catch (Exception)
             {
-
                 return 0;
             }
 
@@ -136,7 +134,7 @@ namespace Libreria
             {
                 for (int i = 0; i < buzon_de_mensajes.Count; i++)
                 {
-                    buzon_de_mensajes[i].Add(mensaje);
+                    buzon_de_mensajes[i].Add(mensaje + "\r\n");
                 }
                 return 1;
             }

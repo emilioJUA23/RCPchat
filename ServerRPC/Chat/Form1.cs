@@ -41,36 +41,7 @@ namespace Chat
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                timer1.Stop();
-                for (int i = 0; i < server_name.Count; i++)
-                {
-                    if (server_name[i] == tb_server_tcp_chan.Text)
-                    {
-                        if (remotes[i].its_in_tha_room(n_user.nickname))
-                        {
-                            remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
-                            server_name.RemoveAt(i);
-                            remotes.RemoveAt(i);
-                            MessageBox.Show("Salimos de la sala.");
-                        }
-                        else
-                        {
-                            server_name.RemoveAt(i);
-                            remotes.RemoveAt(i);
-                            MessageBox.Show("usuario ya no estaba en la sala");
-                        }
-
-                        break;
-                    }
-                }
-                timer1.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            Disconnect(tb_server_tcp_chan.Text);
         }
 
         private void InstanciaUsuario(string nick)
@@ -79,7 +50,6 @@ namespace Chat
             {
                 string puerto_cliente = tb_client_port.Text;
                 n_user = new user(nick, "localhost", puerto_cliente);
-                timer1.Start();
                 MessageBox.Show("Usuario creado.");
             }
             catch (Exception ex)
@@ -111,7 +81,11 @@ namespace Chat
                 typeof(Libreria.Class1), "chat",
                 WellKnownObjectMode.Singleton);
                 local = (Class1)Activator.GetObject(typeof(Class1), "tcp://localhost:" + tb_client_port.Text + "/chat");
-                MessageBox.Show("servidor ha sido montado!");
+                button1.Enabled = false;
+                tb_client_port.Enabled = false;
+                button2.Enabled = true;
+                timer1.Start();
+                MessageBox.Show("Servidor ha sido montado!");
             }
             catch (Exception ex)
             {
@@ -126,6 +100,9 @@ namespace Chat
             {
                 ChannelServices.UnregisterChannel(Channel);
                 Channel = null;
+                button1.Enabled = true;
+                tb_client_port.Enabled = true;
+                button2.Enabled = false;
                 MessageBox.Show("el servidor ha sido apagado.");
             }
         }
@@ -172,7 +149,14 @@ namespace Chat
         #region timer_stuff
         private void timer1_Tick(object sender, EventArgs e)
         {
-            chequear_chat();
+            if (server_name.Count >= 1)
+            {
+                chequear_chat();
+            }
+            if (local != null)
+            {
+                chequear_connected();
+            }
         }
 
         private void chequear_chat()
@@ -181,43 +165,61 @@ namespace Chat
             {
                 for (int i = 0; i < remotes.Count; i++)
                 {
+                    string para_mostrar = "<" + server_name[i] + "> ";
                     remota = remotes[i];
-                    List<string> buzon_aux = remota.mail_delivery(n_user.nickname);
-                    foreach (string c in buzon_aux)
+                    List<string> buzon_aux;
+                    try
                     {
-                        string[] orden = c.Split(',');
-                        if (orden.Length == 3)
+                        buzon_aux = remota.mail_delivery(n_user.nickname);
+                        foreach (string c in buzon_aux)
                         {
-                            if (orden[0] == "dir_init" && !c.Contains("dice:"))
+                            string[] orden = c.Split(',');
+                            if (orden.Length == 3)
                             {
-                                remota.mensaje_privado(directory(orden[1]), orden[2]);
+                                if (orden[0] == "dir_init" && !c.Contains("dice:"))
+                                {
+                                    remota.mensaje_privado(directory(orden[1]), orden[2]);
+                                }
+                                else { }
+                                rtb_Output.Text += (para_mostrar + orden[2] + " te ha pedido un directorio.\r\n");
                             }
-                            else { }
-                            listBox2.Items.Add(orden[2] + " te ha pedido un directorio.");
+                            else if (c == "sudo_kill_yourself")
+                            {
+                                remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
+                                remotes.RemoveAt(i);
+                                server_name.RemoveAt(i);
+                                rtb_Output.Text += (para_mostrar + "has sido eliminado de la sala por el servidor.\r\n");
+                                para_mostrar = null;
+                            }
+                            else
+                            {
+                                rtb_Output.Text += (para_mostrar + c);
+                            }
                         }
-                        else if (c=="sudo_kill_yourself")
-                        {
-                            remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
-                            remotes.RemoveAt(i);
-                            string para_mostrar = server_name[i];
-                            server_name.RemoveAt(i);
-                            listBox2.Items.Add( para_mostrar + "has sido eliminado de la sala por el servidor.");
-                            para_mostrar = null;
-                        }
-                        else
-                        {
-                            listBox2.Items.Add(server_name[i] + "," + c);
-                        }
+                    }
+                    catch (Exception)
+                    {
+                        server_name.RemoveAt(i);
+                        remotes.RemoveAt(i);
+                        i--;
+                        MessageBox.Show("Se perdio la conexion con el servidor " +  para_mostrar);
                     }
                 }
             }
             catch (Exception ex)
             {
-                timer1.Stop();
-                MessageBox.Show("ha ocurrido un error.");
+                MessageBox.Show("Ha ocurrido un error inesperado.");
             }
+        }
 
-
+        private void chequear_connected()
+        {
+            listBox1.Items.Clear();
+            List<string> users = local.connected_server();
+            foreach (string connected in users)
+            {
+                listBox1.Items.Add(connected);
+            }
         }
 
         public string directory(string ruta)
@@ -280,6 +282,38 @@ namespace Chat
             }
         }
 
+        private void Disconnect(string ip_port)
+        {
+            try
+            {
+                for (int i = 0; i < server_name.Count; i++)
+                {
+                    if (server_name[i] == "tcp://" + ip_port + "/chat")
+                    {
+                        if (remotes[i].its_in_tha_room(n_user.nickname))
+                        {
+                            remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
+                            server_name.RemoveAt(i);
+                            remotes.RemoveAt(i);
+                            MessageBox.Show("Salimos de la sala.");
+                        }
+                        else
+                        {
+                            server_name.RemoveAt(i);
+                            remotes.RemoveAt(i);
+                            MessageBox.Show("No se encontro al usuario en la sala");
+                        }
+
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void Send_Message(string message)
         {
             try
@@ -295,53 +329,12 @@ namespace Chat
                 throw;
             }
         }
-        
-        #endregion
 
-        //envia mensajes 
-        private void button6_Click(object sender, EventArgs e)
+        private void ListDirectory(string path)
         {
-            Send_Message(tbmessage.Text);
-        }
-
-        //terminal de comandos tipo usuario
-        private void button5_Click(object sender, EventArgs e)
-        {
-            remota = null;
-            for (int i = 0; i < server_name.Count; i++)
+            try
             {
-                if (server_name[i] == tb_server_tcp_chan.Text)
-                {
-                    remota = remotes[i];
-                    break;
-                }
-            }
-            //if (remota == null)
-            //{
-                //MessageBox.Show("No esta subscrito a este chat");
-            //}
-            //else
-            //{
-                string[] comando = tbcomando.Text.ToLower().Split(' ');
-                if (comando[0] == "connect")
-                {
-                    Try_Connect(comando[1], comando[2]);
-                }
-                else if (comando[0] == "send")
-                {
-                    Send_Message(comando[1]); //TODO: Concatenar todo el mensage 
-                }
-                else if (comando[0] == "list" && comando[1] == "sender")
-                {
-
-                    List<string> users = remota.connected_server();
-                    listBox2.Items.Add("los usuarios conectados son:");
-                    foreach (string c in users)
-                    {
-                        listBox2.Items.Add("\t" + c);
-                    }
-                }
-                else if (comando[0] == "list" && comando[1] == "dir")
+                for (int j = 0; j < remotes.Count; j++)
                 {
                     string dir = tbcomando.Text;
                     string aux = "";//aqui tengo la mera ruta;
@@ -362,18 +355,56 @@ namespace Chat
                         }
                         else { }
                     }
-                    int comp = remota.directories(aux, n_user.nickname);
+                    int comp = remotes[j].directories(path, n_user.nickname);
                     if (comp == 1)
                     {
 
                     }
                     else MessageBox.Show("error al ejecutar instruccion.");
                 }
-                else
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("error al ejecutar instruccion.");
+                throw;
+            }
+        }
+
+        #endregion
+
+        //envia mensajes 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Send_Message(tbmessage.Text);
+        }
+
+        //terminal de comandos tipo usuario
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string[] comando = tbcomando.Text.ToLower().Split(' ');
+            if (comando[0] == "connect")
+            {
+                Try_Connect(comando[1], comando[2]);
+            }
+            else if (comando[0] == "send")
+            {
+                Send_Message(comando[1]); //TODO: Concatenar todo el mensage 
+            }
+            else if (comando[0] == "list" && comando[1] == "sender")
+            {
+                foreach (string c in server_name)
                 {
-                    MessageBox.Show("commando no reconocible.");
+                    rtb_Output.Text += ("\t" + c);
                 }
-            //}
+            }
+            else if (comando[0] == "list" && comando[1] == "dir")
+            {
+                ListDirectory(comando[2]);
+            }
+            else
+            {
+                MessageBox.Show("commando no reconocible.");
+            }
         }
     }
 }

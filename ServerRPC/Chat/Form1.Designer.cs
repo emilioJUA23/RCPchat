@@ -49,8 +49,8 @@
             this.tbcomando = new System.Windows.Forms.TextBox();
             this.tb_server_tcp_chan = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.rtb_Output = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,6 +76,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.rtb_Output);
             this.splitContainer1.Panel2.Controls.Add(this.button6);
             this.splitContainer1.Panel2.Controls.Add(this.button5);
             this.splitContainer1.Panel2.Controls.Add(this.button4);
@@ -87,7 +88,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.tbcomando);
             this.splitContainer1.Panel2.Controls.Add(this.tb_server_tcp_chan);
             this.splitContainer1.Panel2.Controls.Add(this.button3);
-            this.splitContainer1.Panel2.Controls.Add(this.listBox2);
             this.splitContainer1.Size = new System.Drawing.Size(1003, 563);
             this.splitContainer1.SplitterDistance = 333;
             this.splitContainer1.TabIndex = 0;
@@ -138,6 +138,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(255, 25);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -260,17 +261,17 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(38, 205);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(449, 355);
-            this.listBox2.TabIndex = 7;
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // rtb_Output
+            // 
+            this.rtb_Output.Location = new System.Drawing.Point(38, 194);
+            this.rtb_Output.Name = "rtb_Output";
+            this.rtb_Output.Size = new System.Drawing.Size(449, 355);
+            this.rtb_Output.TabIndex = 21;
+            this.rtb_Output.Text = "";
             // 
             // Form1
             // 
@@ -300,7 +301,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox tb_server_tcp_chan;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TextBox tbmessage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbcomando;
@@ -314,6 +314,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox rtb_Output;
     }
 }
 
