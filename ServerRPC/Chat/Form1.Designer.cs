@@ -38,6 +38,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.tb_client_port = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.rtb_Output = new System.Windows.Forms.RichTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.tb_server_tcp_chan = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.rtb_Output = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -145,6 +145,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "stop server";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tb_client_port
@@ -163,6 +164,14 @@
             this.button1.Text = "start server";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // rtb_Output
+            // 
+            this.rtb_Output.Location = new System.Drawing.Point(38, 194);
+            this.rtb_Output.Name = "rtb_Output";
+            this.rtb_Output.Size = new System.Drawing.Size(449, 355);
+            this.rtb_Output.TabIndex = 21;
+            this.rtb_Output.Text = "";
             // 
             // button6
             // 
@@ -264,14 +273,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // rtb_Output
-            // 
-            this.rtb_Output.Location = new System.Drawing.Point(38, 194);
-            this.rtb_Output.Name = "rtb_Output";
-            this.rtb_Output.Size = new System.Drawing.Size(449, 355);
-            this.rtb_Output.TabIndex = 21;
-            this.rtb_Output.Text = "";
             // 
             // Form1
             // 

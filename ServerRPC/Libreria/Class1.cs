@@ -86,7 +86,7 @@ namespace Libreria
                         buzon_de_mensajes.RemoveAt(i);
                         for(int j = 0; j < buzon_de_mensajes.Count; j++)
                         {
-                            buzon_de_mensajes[i].Add(nickname + " salio de la sala");
+                            buzon_de_mensajes[j].Add(nickname + " salio de la sala");
                         }
                         break;
                     }
@@ -134,7 +134,7 @@ namespace Libreria
             {
                 for (int i = 0; i < buzon_de_mensajes.Count; i++)
                 {
-                    buzon_de_mensajes[i].Add(mensaje + "\r\n");
+                    buzon_de_mensajes[i].Add(mensaje );
                 }
                 return 1;
             }

@@ -83,7 +83,7 @@ namespace Chat
                 local = (Class1)Activator.GetObject(typeof(Class1), "tcp://localhost:" + tb_client_port.Text + "/chat");
                 button1.Enabled = false;
                 tb_client_port.Enabled = false;
-                button2.Enabled = true;
+               // button2.Enabled = true;
                 timer1.Start();
                 MessageBox.Show("Servidor ha sido montado!");
             }
@@ -97,7 +97,7 @@ namespace Chat
         private void button2_Click(object sender, EventArgs e)
         {
             if (Channel != null)
-            {
+            {   
                 ChannelServices.UnregisterChannel(Channel);
                 Channel = null;
                 button1.Enabled = true;
@@ -155,7 +155,7 @@ namespace Chat
             }
             if (local != null)
             {
-                chequear_connected();
+             //   chequear_connected();
             }
         }
 
@@ -176,9 +176,9 @@ namespace Chat
                             string[] orden = c.Split(',');
                             if (orden.Length == 3)
                             {
-                                if (orden[0] == "dir_init" && !c.Contains("dice:"))
+                                if (orden[0] == "dir_init")
                                 {
-                                    remota.mensaje_privado(directory(orden[1]), orden[2]);
+                                    remota.mensaje_privado(directory(orden[1])+"\r\n\r\n", orden[2]);
                                 }
                                 else { }
                                 rtb_Output.Text += (para_mostrar + orden[2] + " te ha pedido un directorio.\r\n");
@@ -193,7 +193,7 @@ namespace Chat
                             }
                             else
                             {
-                                rtb_Output.Text += (para_mostrar + c);
+                                rtb_Output.Text += (para_mostrar + c+"\r\n");
                             }
                         }
                     }
@@ -263,7 +263,7 @@ namespace Chat
                 }
                 Class1 RemotedObject = (Class1)Activator.GetObject(typeof(Class1), "tcp://" + ip_port + "/chat");
                 try { RemotedObject.IsInstance(); }
-                catch (Exception ex) { throw new Exception("No se encontro un servidor en la direccion intidaca"); }
+                catch (Exception ex) { throw new Exception("No se encontro un servidor en la direccion indicada"); }
                 if (RemotedObject.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))  //verifica si existo 
                 {
                     MessageBox.Show("El Usuario ya esta en esta sala o nickname ya tomado.");
@@ -355,7 +355,7 @@ namespace Chat
                         }
                         else { }
                     }
-                    int comp = remotes[j].directories(path, n_user.nickname);
+                    int comp = remotes[j].directories(aux, n_user.nickname);
                     if (comp == 1)
                     {
 
@@ -399,7 +399,7 @@ namespace Chat
             }
             else if (comando[0] == "list" && comando[1] == "dir")
             {
-                ListDirectory(comando[2]);
+                ListDirectory(tbcomando.Text);
             }
             else
             {
