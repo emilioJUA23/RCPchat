@@ -8,3 +8,8 @@ C:\EjercicioSO\RPCchat\ServerRPC\Libreria\bin\Debug\Libreria.pdb
 C:\EjercicioSO\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.csprojResolveAssemblyReference.cache
 C:\EjercicioSO\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.dll
 C:\EjercicioSO\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.pdb
+C:\Users\LuisEmilio\Documents\gitrepo\RPCchat\ServerRPC\Libreria\bin\Debug\Libreria.dll
+C:\Users\LuisEmilio\Documents\gitrepo\RPCchat\ServerRPC\Libreria\bin\Debug\Libreria.pdb
+C:\Users\LuisEmilio\Documents\gitrepo\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.csprojResolveAssemblyReference.cache
+C:\Users\LuisEmilio\Documents\gitrepo\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.dll
+C:\Users\LuisEmilio\Documents\gitrepo\RPCchat\ServerRPC\Libreria\obj\Debug\Libreria.pdb

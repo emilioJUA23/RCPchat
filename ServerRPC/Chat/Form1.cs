@@ -258,9 +258,9 @@ namespace Chat
                 string[] direntries = Directory.GetDirectories(ruta);
                 string[] fileEntries = Directory.GetFiles(ruta);
                 foreach (string direntrie in direntries)
-                { resp = resp + direntrie + ','; }
+                { resp = resp + Path.GetDirectoryName(direntrie) + ','; }
                 foreach (string fileName in fileEntries)
-                { resp = resp + fileName + ','; }
+                { resp = resp + Path.GetFileName(fileName) + ','; }
                 resp = resp.Substring(0, resp.Length - 1);
             }
             else
@@ -434,5 +434,5 @@ namespace Chat
                 MessageBox.Show("commando no reconocible.");
             }
         }
-    }
+}
 }
