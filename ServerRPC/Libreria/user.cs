@@ -10,14 +10,13 @@ namespace Libreria
     {
         public string nickname;
         public string ip;
-        public string  port;
+        public string port;
        
         public  user(string nickname,string ip, string port)
         {
             this.ip = ip;
             this.nickname = nickname;
             this.port = port;
-            
         }
 
         public override bool Equals(Object obj)
