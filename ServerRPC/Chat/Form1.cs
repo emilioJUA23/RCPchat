@@ -21,6 +21,7 @@ namespace Chat
         Class1 local;
         List<Class1> remotes = new List<Class1>();
         List<string> server_name = new List<string>();
+        List<int> tiempos = new List<int>();
         TcpChannel Channel;
         user n_user;
 
@@ -196,13 +197,39 @@ namespace Chat
                                 rtb_Output.Text += (para_mostrar + c+"\r\n");
                             }
                         }
+                        tiempos[i] = 0;
                     }
                     catch (Exception)
                     {
-                        server_name.RemoveAt(i);
-                        remotes.RemoveAt(i);
-                        i--;
-                        MessageBox.Show("Se perdio la conexion con el servidor " +  para_mostrar);
+                        if (tiempos[i] >= 4)
+                        {
+                            server_name.RemoveAt(i);
+                            remotes.RemoveAt(i);
+                            tiempos.RemoveAt(i);
+                            i--;
+                            MessageBox.Show("Se perdio la conexion con el servidor " + para_mostrar);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                remotes[i].IsInstance();
+                                if (remotes[i].its_in_tha_room(n_user.nickname))
+                                {
+
+                                }
+                                else
+                                {
+                                    remotes[i].Subscribe(n_user.nickname,n_user.ip,n_user.port);
+                                }
+                             
+                            }
+                            catch (Exception)
+                            {
+                                rtb_Output.Text += "fallo la coneccion con: "+server_name[i]+" se esta tratando de reconectar\r\n";
+                            }
+                            tiempos[i]++;
+                        }
                     }
                 }
             }
@@ -273,6 +300,7 @@ namespace Chat
                     RemotedObject.Subscribe(n_user.nickname, n_user.ip, n_user.port);      //me agrega 
                     remotes.Add(RemotedObject);    //invoca servicio remoto
                     server_name.Add("tcp://" + ip_port + "/chat");                                           //agrega direccio de la sala
+                    tiempos.Add(0);
                     MessageBox.Show("Te has unido a la sala");
                 }
             }
