@@ -258,9 +258,9 @@ namespace Chat
                 string[] direntries = Directory.GetDirectories(ruta);
                 string[] fileEntries = Directory.GetFiles(ruta);
                 foreach (string direntrie in direntries)
-                { resp = resp + direntrie + ','; }
+                { resp = resp + Path.GetDirectoryName(direntrie) + ','; }
                 foreach (string fileName in fileEntries)
-                { resp = resp + fileName + ','; }
+                { resp = resp + Path.GetFileName(fileName) + ','; }
                 resp = resp.Substring(0, resp.Length - 1);
             }
             else
@@ -348,7 +348,11 @@ namespace Chat
             {
                 for (int i = 0; i < server_name.Count; i++)
                 {
-                    int a = remotes[i].broadcast(message, n_user.nickname);
+                    if (server_name[i]=="tcp://"+tb_server_tcp_chan.Text+"/chat")
+                    {
+                        int a = remotes[i].broadcast(message, n_user.nickname);
+                        break;
+                    }
                 }
             }
             catch (Exception)
@@ -383,12 +387,19 @@ namespace Chat
                         }
                         else { }
                     }
-                    int comp = remotes[j].directories(aux, n_user.nickname);
-                    if (comp == 1)
+                    if (server_name[j] == "tcp://" + tb_server_tcp_chan.Text + "/chat")
                     {
 
+                        int comp = remotes[j].directories(aux, n_user.nickname);
+                        if (comp == 1)
+                        {
+
+                        }
+                        else MessageBox.Show("error al ejecutar instruccion.");
+                        break;
                     }
-                    else MessageBox.Show("error al ejecutar instruccion.");
+                    else { }
+                   
                 }
             }
             catch (Exception)
