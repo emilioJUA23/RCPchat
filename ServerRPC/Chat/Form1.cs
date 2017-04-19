@@ -258,7 +258,7 @@ namespace Chat
                 string[] direntries = Directory.GetDirectories(ruta);
                 string[] fileEntries = Directory.GetFiles(ruta);
                 foreach (string direntrie in direntries)
-                { resp = resp + Path.GetDirectoryName(direntrie) + ','; }
+                { resp = resp + Path.GetFileName(direntrie) + ','; }
                 foreach (string fileName in fileEntries)
                 { resp = resp + Path.GetFileName(fileName) + ','; }
                 resp = resp.Substring(0, resp.Length - 1);
@@ -291,7 +291,7 @@ namespace Chat
                 Class1 RemotedObject = (Class1)Activator.GetObject(typeof(Class1), "tcp://" + ip_port + "/chat");
                 try { RemotedObject.IsInstance(); }
                 catch (Exception ex) { throw new Exception("No se encontro un servidor en la direccion indicada"); }
-                if (RemotedObject.its_in_tha_room(n_user.nickname, n_user.ip, n_user.port))  //verifica si existo 
+                if (RemotedObject.its_in_tha_room(n_user.nickname))  //verifica si existo 
                 {
                     MessageBox.Show("El Usuario ya esta en esta sala o nickname ya tomado.");
                 }
@@ -434,5 +434,19 @@ namespace Chat
                 MessageBox.Show("commando no reconocible.");
             }
         }
-}
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            for (int i = 0; i < remotes.Count; i++)
+            {
+                remotes[i].UnSubscribe(n_user.nickname, n_user.ip, n_user.port);
+            }
+
+        }
+    }
 }
